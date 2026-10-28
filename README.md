@@ -73,6 +73,10 @@ node telegram-miniapp-audit/skills/telegram-miniapp-security-audit/scripts/scan.
 ```
 CRITICAL TMA-SEC-002  Bot token exposed to the Mini App frontend
          webapp/src/main.js:13
+         fetch(`https://api.telegram.org/bot${import.meta.env.VITE_BOT_TOKEN}/sendMessage`, {
+HIGH     TMA-AUTH-004 Login Widget key derivation used for Mini App initData
+         server/auth_legacy.py:15
+         secret = hashlib.sha256(BOT_TOKEN.encode()).digest()
 HIGH     TMA-PAY-001  Purchase granted from the client invoice callback
          webapp/src/main.js:27
          if (status === 'paid') unlockPremium();
