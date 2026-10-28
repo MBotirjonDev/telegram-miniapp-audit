@@ -1,6 +1,6 @@
 {
   "name": "telegram-miniapp-audit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Security audit skill for AI coding agents (Claude Code, Codex, Cursor) and a zero-dependency triage scanner for Telegram bots and Mini Apps.",
   "private": true,
   "license": "MIT",

@@ -64,7 +64,9 @@ function validateInitData(raw, botToken, { maxAgeSeconds = 3600, now = Date.now(
 
 function selfTest() {
   const assert = require('assert');
-  const token = '1000000001:TEST-ONLY-not-a-real-token';
+  // Random throwaway values generated per run: never a real bot token.
+  const fakeToken = () => [crypto.randomInt(1e8, 1e9), crypto.randomBytes(26).toString('base64url')].join(':');
+  const token = fakeToken();
   const now = Date.UTC(2026, 0, 1) ;
   const p = new URLSearchParams({
     query_id: 'AAE-test',
@@ -81,7 +83,7 @@ function selfTest() {
   assert.throws(() => validateInitData(forged.toString(), token, { now }), { code: 'BAD_HASH' });
 
   assert.throws(() => validateInitData(raw, token, { now: now + 7200 * 1000 }), { code: 'EXPIRED' });
-  assert.throws(() => validateInitData(raw, '1000000001:other-token', { now }), { code: 'BAD_HASH' });
+  assert.throws(() => validateInitData(raw, fakeToken(), { now }), { code: 'BAD_HASH' });
 
   const loginWidgetSecret = crypto.createHash('sha256').update(token).digest();
   const wrong = new URLSearchParams(raw);

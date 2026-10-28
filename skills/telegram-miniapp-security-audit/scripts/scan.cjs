@@ -17,7 +17,7 @@ const fs = require('fs');
 const path = require('path');
 const RULES = require('./rules.cjs');
 
-const VERSION = '0.1.0';
+const VERSION = '0.1.1';
 const TOOL = 'telegram-miniapp-security-audit';
 const SEVERITIES = ['info', 'low', 'medium', 'high', 'critical'];
 const SKIP_DIRS = new Set([

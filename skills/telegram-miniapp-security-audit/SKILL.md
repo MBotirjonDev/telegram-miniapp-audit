@@ -7,7 +7,7 @@ description: Security audit for Telegram bots and Telegram Mini Apps (Web Apps) 
 
 You are auditing a Telegram bot and/or Mini App the way an attacker would: someone who can
 open the Mini App in Telegram Desktop with DevTools, read its JavaScript, craft any
-`t.me/...?startapp=` link, call the backend with `curl`, and send any message to the bot.
+`t.me/...?startapp=` link, call the backend with any HTTP client, and send any message to the bot.
 Your job is to find **real, reachable** failures and explain them so the developer can fix
 them today.
 
@@ -153,6 +153,15 @@ hardening notes, and coverage.
 - Using a real token you found to "prove" impact. Describe it; never call the API.
 - Pasting full tokens or secrets into the report. Show the bot id and `AA…` only.
 - Inventing backend behaviour you cannot see. Use `needs_validation`.
+
+## What this skill runs
+
+- `scripts/scan.cjs`, `scripts/validate-findings.cjs` and `scripts/verify-init-data.cjs` are
+  plain Node.js with no dependencies. They read files in the project you point them at and
+  write JSON to the output folder you choose. They make **no network calls** and execute no
+  shell commands.
+- URLs and environment-variable names in `checks/*.md` are documentation and code examples
+  of what to look for, not endpoints this skill contacts.
 
 ## Re-runs
 
