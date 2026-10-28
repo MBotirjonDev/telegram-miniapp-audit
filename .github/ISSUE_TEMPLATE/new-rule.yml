@@ -1,0 +1,23 @@
+name: New rule
+description: Propose a new scanner rule or checklist item
+labels: [new-rule]
+body:
+  - type: textarea
+    id: bug
+    attributes:
+      label: The Telegram bot / Mini App bug pattern
+      description: What goes wrong, and what an attacker gains.
+    validations:
+      required: true
+  - type: textarea
+    id: bad
+    attributes:
+      label: Vulnerable example (smallest possible)
+    validations:
+      required: true
+  - type: textarea
+    id: good
+    attributes:
+      label: Safe version
+    validations:
+      required: true

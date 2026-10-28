@@ -1,0 +1,46 @@
+{
+  "target": "example_shop_miniapp",
+  "audited_commit": "a1b2c3d",
+  "generated_at": "2026-10-29T09:00:00Z",
+  "findings": [
+    {
+      "id": "F-1",
+      "verdict": "confirmed",
+      "area": "initdata",
+      "title": "Balance API trusts user_id from the request body",
+      "severity": "high",
+      "cwe": "CWE-639",
+      "leads": ["TMA-AUTH-001", "TMA-AUTH-002"],
+      "location": { "file": "server/routes/balance.js", "line": 18 },
+      "attacker": "Any Telegram user who opens the Mini App, or anyone with curl. No special access needed.",
+      "trace": [
+        "webapp/src/api.js:12 sends { user_id: Telegram.WebApp.initDataUnsafe.user.id } in the request body",
+        "server/routes/balance.js:18 reads req.body.user_id and loads that user's wallet; initData is never validated on this route",
+        "POST /api/withdraw with another user's id moves their balance to the caller's card"
+      ],
+      "impact": "Read and withdraw any user's balance. Full account takeover of the wallet feature.",
+      "fix": "Send `Authorization: tma ${Telegram.WebApp.initData}`, validate it in a middleware (HMAC with key HMAC_SHA256('WebAppData', BOT_TOKEN), auth_date ≤ 1h), and use the validated user.id. Ignore user_id from the body.",
+      "verified_by": "verifier-2 (fresh context, re-read routes and middleware registration)"
+    },
+    {
+      "id": "F-2",
+      "verdict": "needs_validation",
+      "area": "bot",
+      "title": "Webhook may accept forged updates",
+      "cwe": "CWE-345",
+      "leads": ["TMA-NET-001"],
+      "location": { "file": "bot/main.py", "line": 41 },
+      "unresolved": "set_webhook is called without secret_token; whether the nginx config in front of the bot restricts the webhook path to Telegram's IP ranges is not in the repository."
+    },
+    {
+      "id": "F-3",
+      "verdict": "rejected",
+      "area": "frontend",
+      "title": "innerHTML in the splash screen",
+      "cwe": "CWE-79",
+      "leads": ["TMA-WEB-001"],
+      "location": { "file": "webapp/src/splash.js", "line": 7 },
+      "rejection_reason": "The assigned value is a static SVG string defined in the same file; no user, URL or API data reaches it."
+    }
+  ]
+}

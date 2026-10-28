@@ -1,0 +1,53 @@
+name: 'Telegram Mini App Audit'
+description: 'Zero-dependency triage scan for Telegram bots and Mini Apps: bot tokens, initData validation, webhooks, payments and more.'
+author: 'MBotirjonDev'
+branding:
+  icon: 'shield'
+  color: 'blue'
+
+inputs:
+  path:
+    description: 'Path to the project (or monorepo root) to scan'
+    required: false
+    default: '.'
+  fail-on:
+    description: 'Fail the job when a lead at or above this severity is found: info | low | medium | high | critical | none'
+    required: false
+    default: 'high'
+  min-severity:
+    description: 'Ignore leads below this severity'
+    required: false
+    default: 'low'
+  output:
+    description: 'Where to write the JSON leads file'
+    required: false
+    default: 'telegram-miniapp-leads.json'
+  sarif:
+    description: 'Optional path for a SARIF file (upload it with github/codeql-action/upload-sarif)'
+    required: false
+    default: ''
+
+outputs:
+  leads-file:
+    description: 'Path to the JSON leads file'
+    value: ${{ inputs.output }}
+  sarif-file:
+    description: 'Path to the SARIF file, if requested'
+    value: ${{ inputs.sarif }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run telegram-miniapp-security-audit scanner
+      shell: bash
+      env:
+        TMA_PATH: ${{ inputs.path }}
+        TMA_FAIL_ON: ${{ inputs.fail-on }}
+        TMA_MIN: ${{ inputs.min-severity }}
+        TMA_OUT: ${{ inputs.output }}
+        TMA_SARIF: ${{ inputs.sarif }}
+      run: |
+        args=("$TMA_PATH" --out "$TMA_OUT" --min-severity "$TMA_MIN")
+        if [ -n "$TMA_SARIF" ]; then args+=(--sarif "$TMA_SARIF"); fi
+        if [ "$TMA_FAIL_ON" != "none" ]; then args+=(--fail-on "$TMA_FAIL_ON"); fi
+        node "${{ github.action_path }}/skills/telegram-miniapp-security-audit/scripts/scan.cjs" "${args[@]}"
