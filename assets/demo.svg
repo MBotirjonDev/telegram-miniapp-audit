@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="729" viewBox="0 0 1280 729" role="img" aria-label="Real output on the intentionally vulnerable test fixture">
+<rect width="1280" height="729" rx="14" fill="#0D1117"/>
+<rect width="1280" height="48" rx="14" fill="#161B22"/><rect y="34" width="1280" height="14" fill="#161B22"/>
+<circle cx="28" cy="24" r="7" fill="#FF5F57"/><circle cx="52" cy="24" r="7" fill="#FEBC2E"/><circle cx="76" cy="24" r="7" fill="#28C840"/>
+<text x="640.0" y="30" text-anchor="middle" font-family="Inter, 'Segoe UI', -apple-system, Helvetica, Arial, sans-serif" font-size="15" fill="#8B949E">telegram-miniapp-audit — triage scan</text>
+<g font-family="'JetBrains Mono', SFMono-Regular, Consolas, 'DejaVu Sans Mono', Menlo, monospace" font-size="17" xml:space="preserve">
+<text x="40" y="100"><tspan fill="#7EE787">➜</tspan><tspan fill="#79C0FF"> shop_miniapp</tspan><tspan fill="#E6EDF3"> node scan.cjs .</tspan></text>
+<text x="40" y="141.6" fill="#8B949E">telegram-miniapp-security-audit · shop_miniapp · 19 rules</text>
+<text x="40" y="180.6"><tspan fill="#FF7B72" font-weight="700">CRITICAL </tspan><tspan fill="#D2A8FF">TMA-SEC-002</tspan><tspan fill="#E6EDF3">  Bot token exposed to the Mini App frontend</tspan></text>
+<text x="133" y="206.6" fill="#79C0FF">webapp/src/main.js:13<tspan fill="#6E7681">   fetch(`https://api.telegram.org/bot${import.meta.env.VITE_BOT_TOKEN}/s…</tspan></text>
+<text x="40" y="241.7"><tspan fill="#FFA657" font-weight="700">HIGH     </tspan><tspan fill="#D2A8FF">TMA-AUTH-004</tspan><tspan fill="#E6EDF3">  Login Widget key derivation used for Mini App initData</tspan></text>
+<text x="133" y="267.7" fill="#79C0FF">server/auth_legacy.py:15<tspan fill="#6E7681">   secret = hashlib.sha256(BOT_TOKEN.encode()).digest()</tspan></text>
+<text x="40" y="302.8"><tspan fill="#FFA657" font-weight="700">HIGH     </tspan><tspan fill="#D2A8FF">TMA-PAY-001</tspan><tspan fill="#E6EDF3">  Purchase granted from the client invoice callback</tspan></text>
+<text x="133" y="328.8" fill="#79C0FF">webapp/src/main.js:27<tspan fill="#6E7681">   if (status === 'paid') unlockPremium();</tspan></text>
+<text x="40" y="363.90000000000003"><tspan fill="#E3B341" font-weight="700">MEDIUM   </tspan><tspan fill="#D2A8FF">TMA-AUTH-002</tspan><tspan fill="#E6EDF3">  Backend trusts a user id from the request</tspan></text>
+<text x="133" y="389.90000000000003" fill="#79C0FF">server/index.js:22<tspan fill="#6E7681">   const userId = req.body.user_id;</tspan></text>
+<text x="40" y="425.00000000000006"><tspan fill="#E3B341" font-weight="700">MEDIUM   </tspan><tspan fill="#D2A8FF">TMA-AUTH-001</tspan><tspan fill="#E6EDF3">  Identity taken from initDataUnsafe</tspan></text>
+<text x="133" y="451.00000000000006" fill="#79C0FF">webapp/src/main.js:3<tspan fill="#6E7681">   const user = tg.initDataUnsafe.user;</tspan></text>
+<text x="40" y="486.1000000000001"><tspan fill="#E3B341" font-weight="700">MEDIUM   </tspan><tspan fill="#D2A8FF">TMA-NET-001</tspan><tspan fill="#E6EDF3">  Webhook set without a secret token</tspan></text>
+<text x="133" y="512.1000000000001" fill="#79C0FF">bot/main.py:28<tspan fill="#6E7681">   await bot.set_webhook(WEBHOOK_URL)</tspan></text>
+<text x="40" y="547.2000000000002"><tspan fill="#E3B341" font-weight="700">MEDIUM   </tspan><tspan fill="#D2A8FF">TMA-BOT-001</tspan><tspan fill="#E6EDF3">  Admin check by username</tspan></text>
+<text x="133" y="573.2000000000002" fill="#79C0FF">bot/main.py:18<tspan fill="#6E7681">   if message.from_user.username == "shop_admin":</tspan></text>
+<text x="40" y="608.3000000000002"><tspan fill="#E3B341" font-weight="700">MEDIUM   </tspan><tspan fill="#D2A8FF">TMA-WEB-001</tspan><tspan fill="#E6EDF3">  HTML injection sink in the Mini App</tspan></text>
+<text x="133" y="634.3000000000002" fill="#79C0FF">webapp/src/main.js:5<tspan fill="#6E7681">   document.getElementById('hello').innerHTML = 'Salom, ' + user.first_nam…</tspan></text>
+<text x="40" y="669.4000000000002"><tspan fill="#E6EDF3" font-weight="700">19 leads</tspan><tspan fill="#8B949E">  (</tspan><tspan fill="#FF7B72">critical 1</tspan><tspan fill="#8B949E"> · </tspan><tspan fill="#FFA657">high 3</tspan><tspan fill="#8B949E"> · </tspan><tspan fill="#E3B341">medium 7</tspan><tspan fill="#8B949E"> · </tspan><tspan fill="#79C0FF">low 7</tspan><tspan fill="#8B949E"> · </tspan><tspan fill="#8B949E">info 1</tspan><tspan fill="#8B949E">)  →  agent validates each lead before reporting</tspan></text>
+</g></svg>

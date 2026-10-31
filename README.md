@@ -1,6 +1,8 @@
 <div align="center">
 
-# Telegram Mini App Audit
+<img src="assets/banner.png" alt="Telegram Mini App Audit" width="100%">
+
+<h1>Telegram Mini App Audit</h1>
 
 <h3>Turn Claude Code, Codex or Cursor into a Telegram bot &amp; Mini App security auditor.</h3>
 
@@ -24,6 +26,9 @@ plus a zero-dependency scanner for your laptop and your CI.</p>
 > ```
 > security audit this telegram mini app
 > ```
+
+<p align="center"><img src="assets/demo.png" alt="Real output of Telegram Mini App Audit on the intentionally vulnerable test fixture" width="100%"></p>
+<p align="center"><sub>Real output on the intentionally vulnerable fixture in <code>tests/fixtures/vuln_app</code>.</sub></p>
 
 ## Why this exists
 
@@ -205,6 +210,24 @@ webhook examples without `secret_token`, which is exactly what the rule is for.
 - [ ] More stacks: Rust (teloxide), C# (Telegram.Bot), Java (TelegramBots)
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Each rule is a regex, a fixture and a test.
+
+## Part of a toolkit
+
+Four zero-dependency agent skills that share the same lead → validate → report workflow.
+They work well together on a typical Flutter + Supabase + Telegram stack.
+
+| Skill | What it covers |
+|---|---|
+| [Flutter Audit Agent](https://github.com/MBotirjonDev/flutter-audit-agent) | Security audit for Flutter & Dart apps: secrets, storage, TLS, WebViews, Firebase rules |
+| **[Telegram Mini App Audit](https://github.com/MBotirjonDev/telegram-miniapp-audit)** (you are here) | Security audit for Telegram bots and Mini Apps: initData, bot tokens, webhooks, payments |
+| [Supabase RLS Audit](https://github.com/MBotirjonDev/supabase-rls-audit) | Row Level Security audit: open tables, weak policies, definer views and functions, storage |
+| [Flutter Release Checker](https://github.com/MBotirjonDev/flutter-release-checker) | Finds what gets Flutter apps rejected by Google Play and the App Store |
+
+## Star history
+
+If this saved you a leak or a rejected upload, a ⭐ helps other developers find it.
+
+[![Star History Chart](https://api.star-history.com/svg?repos=MBotirjonDev/telegram-miniapp-audit&type=Date)](https://star-history.com/#MBotirjonDev/telegram-miniapp-audit&Date)
 
 ## License
 

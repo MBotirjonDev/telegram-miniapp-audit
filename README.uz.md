@@ -1,3 +1,9 @@
+<div align="center">
+
+<img src="assets/banner.png" alt="Telegram Mini App Audit" width="100%">
+
+</div>
+
 # Telegram Mini App Audit 🇺🇿
 
 **Claude Code, Codex yoki Cursor'ni Telegram bot va Mini App xavfsizlik auditoriga aylantiradi.**
@@ -55,3 +61,11 @@ initData'ni to'g'ri tekshirish uchun tayyor kod: `scripts/verify-init-data.cjs`
 Yangi qoida = regex + fixture + test. Batafsil: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 MIT litsenziyasi. Telegram bilan bog'liq emas.
+
+## Boshqa skill'lar
+
+Shu muallifning boshqa bepul agent skill'lari:
+
+- [Flutter Audit Agent](https://github.com/MBotirjonDev/flutter-audit-agent) — Security audit for Flutter & Dart apps: secrets, storage, TLS, WebViews, Firebase rules
+- [Supabase RLS Audit](https://github.com/MBotirjonDev/supabase-rls-audit) — Row Level Security audit: open tables, weak policies, definer views and functions, storage
+- [Flutter Release Checker](https://github.com/MBotirjonDev/flutter-release-checker) — Finds what gets Flutter apps rejected by Google Play and the App Store
